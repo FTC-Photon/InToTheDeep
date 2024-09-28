@@ -1,0 +1,71 @@
+Expansion hub
+Normal hub
+
+Use unspecified mothers for DcMotor
+
+How to update git hub master
+git status : Check which files have been modified, added, or deleted
+git add . : Add all changes
+git commit -m "Describe changes" : Commit the staged changes
+git pull origin master : (Optional) Ensures local repository is up-to-date with the remote repository
+git push origin master : Push your local commits to the remote repository on GitHub
+
+Update master
+git add .
+git commit -m "Describe changes"
+git push origin master
+
+Branching
+git checkout -b new-branch-name : Create a new branch and switch to it
+git branch : View All Branches
+git checkout new-branch-name : Goes to branch new-branch-name
+
+Merging a Branch into master
+git checkout master : switch to what you want to merge into
+git merge new-branch-name : Merges your branch with current (in this case would be master)
+git push origin master : After merging push changes to GitHub
+
+Updating a Branch
+git add .
+git commit -m "Adddescription"
+git push origin feature-branch
+
+git checkout new-branch-name : Goes to branch new-branch-name
+git pull origin master : Merges the changes master branch into new-branch-name. If there are any conflicts, you will need to resolve them
+
+
+steps to find a past commit and revert to it:
+
+1. Find the Past Commit:
+git log
+Lists the commit history so you can identify the commit you want to revert to.
+
+2. Check Out the Past Commit:
+git checkout <commit-hash>
+Switches your working directory to the specified past commit using its hash.
+
+3. Create a New Branch from the Past Commit (Optional):
+git checkout -b <new-branch-name>
+Creates and switches to a new branch from the checked-out commit.
+
+4. Merge with an Existing Branch (If Needed):
+git checkout <existing-branch>
+git merge <new-branch-name>
+Merges the new branch into an existing branch (e.g., master), resolving any conflicts as necessary.
+
+5. Abort the Merge (If Conflicts Occur):
+git merge --abort
+Cancels the merge and reverts the existing branch to its previous state if conflicts are too complex to resolve.
+
+6. Force an Existing Branch to Match the Past Commit:
+git checkout -B <existing-branch>
+Resets the existing branch (e.g., master) to match the state of the past commit.
+
+7. Force Push to Update the Remote Repository:
+git push --force origin <existing-branch>
+Overwrites the remote branch with the local state, making the past commit the current state of the branch.
+
+8. Create a New Branch for Future Work (Optional):
+git checkout -b <new-feature-branch>
+git push origin <new-feature-branch>
+Creates and pushes a new branch to the remote repository for ongoing development.

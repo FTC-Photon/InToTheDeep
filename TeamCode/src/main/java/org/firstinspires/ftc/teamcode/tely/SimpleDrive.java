@@ -40,10 +40,10 @@ public class SimpleDrive extends LinearOpMode {
                 vertical = 0.6 * -gamepad1.left_stick_y;
                 horizontal = (0.6 * gamepad1.left_stick_x) + (gamepad2.left_stick_x * 0.4);
                 pivot = 0.6 * gamepad1.right_stick_x;
-                br.setPower(-pivot + (vertical + horizontal));
-                fr.setPower(-pivot + vertical - horizontal);
-                bl.setPower(pivot + vertical - horizontal);
-                fl.setPower(pivot + vertical + horizontal);
+                br.setPower(-pivot + (-vertical + horizontal));
+                fr.setPower(-pivot - vertical - horizontal);
+                bl.setPower(pivot - vertical - horizontal);
+                fl.setPower(pivot - vertical + horizontal);
 
                 //GAMEPAD 2
 
