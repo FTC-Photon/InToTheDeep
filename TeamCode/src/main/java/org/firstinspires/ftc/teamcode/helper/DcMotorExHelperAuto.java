@@ -6,7 +6,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Class that can hold helper methods related to motors for autonomous simplification
  */
-public class MotorHelperAuto extends MotorHelper {
+public class DcMotorExHelperAuto extends DcMotorExHelper {
 
     /**
      * Moves robot left if left is true or right if left is false by powering {"br","bl","fl","fr}
@@ -15,7 +15,7 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStrafe(int goal, int power, boolean left, Telemetry telemetry){
+    public void moveToGoalStrafe(int goal, double power, boolean left, Telemetry telemetry){
         validateMovementMotors();
         if(left) {
             //-br bl -fl fr
@@ -47,7 +47,7 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStraight(int goal, int power, Telemetry telemetry){
+    public void moveToGoalStraight(int goal, double power, Telemetry telemetry){
         validateMovementMotors();
         for(String name: MOVEMENT_MOTORS){
             moveToGoal(name, goal,power, telemetry);
