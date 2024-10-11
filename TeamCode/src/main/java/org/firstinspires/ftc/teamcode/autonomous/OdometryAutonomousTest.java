@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
 import org.firstinspires.ftc.teamcode.helper.DcMotorExHelperAuto;
+import org.firstinspires.ftc.teamcode.helper.MotorHelperAuto;
 import org.firstinspires.ftc.teamcode.helper.OdometryHelper;
 import org.firstinspires.ftc.teamcode.helper.PositionTracker;
 import org.firstinspires.ftc.teamcode.helper.geomoetry.Pose2d;
@@ -10,16 +13,27 @@ import org.firstinspires.ftc.teamcode.helper.geomoetry.Rotation2d;
 
 @Autonomous(name = "OdometryAutonomousTest", group = "Linear Opmode")
 public class OdometryAutonomousTest extends LinearOpMode {
-    private DcMotorExHelperAuto motorHelper;
+    private MotorHelperAuto motorHelper;
     private OdometryHelper odometryHelper;
     private PositionTracker positionTracker;
+
+    private DcMotorEx fr;
 
     @Override
     public void runOpMode() {
         // Initialize motor helper and odometry helper
-        motorHelper = new DcMotorExHelperAuto();
+        motorHelper = new MotorHelperAuto();
         motorHelper.initializeWheels(hardwareMap);
 
+        if(motorHelper.areWheelsNull()){
+            telemetry.addLine("Wheels are null");
+            telemetry.update();
+        } else {
+            telemetry.addLine("Wheels are not null");
+            telemetry.update();
+        }
+
+        fr = hardwareMap.get(DcMotorEx.class, "fr");
         // Create an initial robot position
         Pose2d startPose = new Pose2d(0, 0, new Rotation2d(0));
         positionTracker = new PositionTracker(startPose);
@@ -31,16 +45,25 @@ public class OdometryAutonomousTest extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
+            odometryHelper.update();
+            telemetry.addData("Position before trying to move forward", positionTracker.getRobotPose());
+            telemetry.update();
+
+
+            // Pause
+            sleep(10000);
+
+
             // Move straight forward
             motorHelper.moveToGoalStraight(1000, 0.5, telemetry);
 
             // Update odometry and display the current pose
             odometryHelper.update();
-            telemetry.addData("Position", positionTracker.getRobotPose());
+            telemetry.addData("Position after trying to move forward", positionTracker.getRobotPose());
             telemetry.update();
 
             // Pause
-            sleep(1000);
+            sleep(10000);
 
             // Move right
             motorHelper.moveToGoalStrafe(500, 0.5, false, telemetry);
@@ -51,7 +74,7 @@ public class OdometryAutonomousTest extends LinearOpMode {
             telemetry.update();
 
             // Sleep to observe the movement
-            sleep(1000);
+            sleep(10000);
 
             // Move straight again
             motorHelper.moveToGoalStraight(1000, 0.5, telemetry);

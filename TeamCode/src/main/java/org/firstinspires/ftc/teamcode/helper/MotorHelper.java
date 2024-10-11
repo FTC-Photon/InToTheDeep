@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.helper;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.Dictionary;
@@ -182,5 +183,13 @@ public class MotorHelper {
                 throw new IllegalStateException("One or more MOVEMENT_MOTORS are not initialized");
             }
         }
+    }
+
+    public boolean areWheelsNull() {
+        DcMotor fl = motors.get("fl");
+        DcMotor fr = motors.get("fr");
+        DcMotor bl = motors.get("bl");
+        DcMotor br = motors.get("fr");
+        return fl == null || fr == null || br == null || bl == null;
     }
 }

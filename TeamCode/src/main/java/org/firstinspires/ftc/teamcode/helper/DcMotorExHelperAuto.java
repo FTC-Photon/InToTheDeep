@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.helper;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.helper.hardware.MotorEx;
 
 /**
  * Class that can hold helper methods related to motors for autonomous simplification
@@ -19,24 +22,16 @@ public class DcMotorExHelperAuto extends DcMotorExHelper {
         validateMovementMotors();
         if(left) {
             //-br bl -fl fr
-            for (int i = 0; i < 3; i++) {
-                int neg = 0;
-                if (i % 2 == 0) {
-                    moveToGoal(MOVEMENT_MOTORS[-i], goal, power, telemetry);
-                } else {
-                    moveToGoal(MOVEMENT_MOTORS[i], goal, power, telemetry);
-                }
-            }
+            moveToGoal(MOVEMENT_MOTORS[0], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[2], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[1], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[3], goal, power, telemetry);
         } else {
             //br -bl fl -fr
-            for (int i = 0; i < 3; i++) {
-                int neg = 0;
-                if (i % 2 == 0) {
-                    moveToGoal(MOVEMENT_MOTORS[i], goal, power, telemetry);
-                } else {
-                    moveToGoal(MOVEMENT_MOTORS[-i], goal, power, telemetry);
-                }
-            }
+            moveToGoal(MOVEMENT_MOTORS[0], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[2], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[1], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[3], -goal, power, telemetry);
         }
     }
 
@@ -50,6 +45,7 @@ public class DcMotorExHelperAuto extends DcMotorExHelper {
     public void moveToGoalStraight(int goal, double power, Telemetry telemetry){
         validateMovementMotors();
         for(String name: MOVEMENT_MOTORS){
+            telemetry.addLine("trying to set goal for " + name);
             moveToGoal(name, goal,power, telemetry);
         }
     }
@@ -106,7 +102,7 @@ public class DcMotorExHelperAuto extends DcMotorExHelper {
         if(motors.get(name) == null){
             throw new IllegalStateException("Name does not correspond to a current motor");
         }
-        DcMotor motor = motors.get(name);
+        DcMotorEx motor = motors.get(name);
 
 
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

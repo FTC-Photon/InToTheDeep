@@ -26,9 +26,9 @@ public class OdometryHelper {
         this.WHEEL_DIAMETER = wheelDiameter;
         this.DISTANCE_PER_PULSE = Math.PI * WHEEL_DIAMETER / TICKS_PER_REV;
 
-        leftEncoder = new MotorEx(hardwareMap, "left odometer");
-        rightEncoder = new MotorEx(hardwareMap, "right odometer");
-        perpEncoder = new MotorEx(hardwareMap, "center odometer");
+        leftEncoder = new MotorEx(hardwareMap, "fl");
+        rightEncoder = new MotorEx(hardwareMap, "fr");
+        perpEncoder = new MotorEx(hardwareMap, "bl");
 
         leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);

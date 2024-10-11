@@ -122,6 +122,7 @@ public class DcMotorExHelper {
      * @param telemetry used for displaying telemetry information
      */
     public void moveToGoal(String name, int goal, double power, Telemetry telemetry) {
+
         DcMotorEx motor = motors.get(name);
         if (motor == null) {
             throw new IllegalStateException("Motor " + name + " is not initialized");
@@ -245,5 +246,13 @@ public class DcMotorExHelper {
                 throw new IllegalStateException("One or more MOVEMENT_MOTORS are not initialized");
             }
         }
+    }
+
+    public boolean areWheelsNull() {
+        DcMotorEx fl = motors.get("fl");
+        DcMotorEx fr = motors.get("fr");
+        DcMotorEx bl = motors.get("bl");
+        DcMotorEx br = motors.get("fr");
+        return fl == null || fr == null || br == null || bl == null;
     }
 }

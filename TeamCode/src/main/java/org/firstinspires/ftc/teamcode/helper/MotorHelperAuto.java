@@ -15,28 +15,20 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStrafe(int goal, int power, boolean left, Telemetry telemetry){
+    public void moveToGoalStrafe(int goal, double power, boolean left, Telemetry telemetry){
         validateMovementMotors();
         if(left) {
             //-br bl -fl fr
-            for (int i = 0; i < 3; i++) {
-                int neg = 0;
-                if (i % 2 == 0) {
-                    moveToGoal(MOVEMENT_MOTORS[-i], goal, power, telemetry);
-                } else {
-                    moveToGoal(MOVEMENT_MOTORS[i], goal, power, telemetry);
-                }
-            }
+            moveToGoal(MOVEMENT_MOTORS[0], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[2], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[1], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[3], goal, power, telemetry);
         } else {
             //br -bl fl -fr
-            for (int i = 0; i < 3; i++) {
-                int neg = 0;
-                if (i % 2 == 0) {
-                    moveToGoal(MOVEMENT_MOTORS[i], goal, power, telemetry);
-                } else {
-                    moveToGoal(MOVEMENT_MOTORS[-i], goal, power, telemetry);
-                }
-            }
+            moveToGoal(MOVEMENT_MOTORS[0], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[2], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[1], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[3], -goal, power, telemetry);
         }
     }
 
@@ -47,7 +39,7 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStraight(int goal, int power, Telemetry telemetry){
+    public void moveToGoalStraight(int goal, double power, Telemetry telemetry){
         validateMovementMotors();
         for(String name: MOVEMENT_MOTORS){
             moveToGoal(name, goal,power, telemetry);

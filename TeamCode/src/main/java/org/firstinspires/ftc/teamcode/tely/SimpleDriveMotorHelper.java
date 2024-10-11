@@ -35,7 +35,7 @@ public class SimpleDriveMotorHelper extends LinearOpMode {
                 //GAMEPAD 1
 
                 // Drive using MotorHelper's omniDriveGamePadStick method
-                motorHelper.omniDriveGamePadStick(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+               // motorHelper.driveGamePadStick(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
                 //GAMEPAD 2
 
