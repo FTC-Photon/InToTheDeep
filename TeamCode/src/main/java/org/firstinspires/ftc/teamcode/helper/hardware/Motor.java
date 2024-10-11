@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.helper.hardware;
+package com.arcrobotics.ftclib.hardware.motors;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 import org.firstinspires.ftc.teamcode.helper.controllers.PController;
 import org.firstinspires.ftc.teamcode.helper.controllers.PIDController;
 import org.firstinspires.ftc.teamcode.helper.controllers.SimpleMotorFeedforward;
+import org.firstinspires.ftc.teamcode.helper.hardware.HardwareDevice;
 
 import java.util.function.Supplier;
 
@@ -21,10 +22,6 @@ import java.util.function.Supplier;
  */
 public class Motor implements HardwareDevice {
 
-    /**
-     * Enum representing different GoBILDA motor configurations.
-     * Each corresponds to a motor with specific encoder ticks per revolution (TPR) and RPM.
-     */
     public enum GoBILDA {
         RPM_30(5264, 30), RPM_43(3892, 43), RPM_60(2786, 60), RPM_84(1993.6, 84),
         RPM_117(1425.2, 117), RPM_223(753.2, 223), RPM_312(537.6, 312), RPM_435(383.6, 435),
@@ -65,6 +62,7 @@ public class Motor implements HardwareDevice {
     }
 
     public class Encoder {
+
         private Supplier<Integer> m_position;
         private int resetVal, lastPosition;
         private Direction direction;
@@ -184,6 +182,7 @@ public class Motor implements HardwareDevice {
             }
             return real;
         }
+
     }
 
     /**
@@ -337,19 +336,10 @@ public class Motor implements HardwareDevice {
     }
 
     /**
-     * Resets the external encoder wrapper value.
+     * Resets the encoder.
      */
     public void resetEncoder() {
         encoder.reset();
-    }
-
-    /**
-     * Resets the internal position of the motor.
-     */
-    public void stopAndResetEncoder() {
-        encoder.resetVal = 0;
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /**

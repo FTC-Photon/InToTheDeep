@@ -101,7 +101,7 @@ public class MotorHelperAuto extends MotorHelper {
         DcMotor motor = motors.get(name);
 
 
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setTargetPosition(goal);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -112,7 +112,6 @@ public class MotorHelperAuto extends MotorHelper {
         telemetry.update();
         telemetry.addData("Mode", "running");
         telemetry.update();
-
 
 
 

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.helper.hardware.MotorEx;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -14,7 +15,7 @@ import java.util.List;
  * Helper class for managing DcMotorEx motors in an FTC robot using Dictionary.
  */
 public class DcMotorExHelper {
-    Dictionary<String, DcMotorEx> motors;
+    Dictionary<String, MotorEx> motors;
     protected double defaultPower = 0.4;
 
     /**
@@ -38,10 +39,10 @@ public class DcMotorExHelper {
      * @param hardwareMap The hardware map from which to retrieve motors
      */
     public void initializeWheels(HardwareMap hardwareMap) {
-        motors.put("br", hardwareMap.get(DcMotorEx.class, "br"));
-        motors.put("bl", hardwareMap.get(DcMotorEx.class, "bl"));
-        motors.put("fl", hardwareMap.get(DcMotorEx.class, "fl"));
-        motors.put("fr", hardwareMap.get(DcMotorEx.class, "fr"));
+        motors.put("br", hardwareMap.get(MotorEx.class, "br"));
+        motors.put("bl", hardwareMap.get(MotorEx.class, "bl"));
+        motors.put("fl", hardwareMap.get(MotorEx.class, "fl"));
+        motors.put("fr", hardwareMap.get(MotorEx.class, "fr"));
     }
 
     /**
@@ -52,97 +53,97 @@ public class DcMotorExHelper {
      */
     public void initializeHardwareMap(HardwareMap hardwareMap, String[] motorNames) {
         for (String name : motorNames) {
-            DcMotorEx motor = hardwareMap.get(DcMotorEx.class, name);
+            MotorEx motor = hardwareMap.get(MotorEx.class, name);
             if (motor != null) {
                 motors.put(name, motor);
             }
         }
     }
 
-    /**
-     * Sets the power for a single motor by name
-     *
-     * @param name The name of the motor
-     * @param power The power level to set for the motor (range from -1.0 to 1.0)
-     */
-    public void setPower(String name, double power) {
-        DcMotorEx motor = motors.get(name);
-        if (motor != null) {
-            motor.setPower(power);
-        }
-    }
+//    /**
+//     * Sets the power for a single motor by name
+//     *
+//     * @param name The name of the motor
+//     * @param power The power level to set for the motor (range from -1.0 to 1.0)
+//     */
+//    public void setPower(String name, double power) {
+//        MotorEx motor = motors.get(name);
+//        if (motor != null) {
+//            motor.setPower(power);
+//        }
+//    }
+//
+//    /**
+//     * Sets the power for a single motor by name using the default power
+//     *
+//     * @param name The name of the motor
+//     */
+//    public void setPower(String name) {
+//        MotorEx motor = motors.get(name);
+//        if (motor != null) {
+//            motor.setPower(defaultPower);
+//        }
+//    }
+//
+//    /**
+//     * Sets the power for multiple motors by name using a specified power level
+//     *
+//     * @param names Array of motor names.
+//     * @param power The power level to set for the motors (range from -1.0 to 1.0)
+//     */
+//    public void setPower(String[] names, double power) {
+//        for (String name : names) {
+//            MotorEx motor = motors.get(name);
+//            if (motor != null) {
+//                motor.setPower(power);
+//            }
+//        }
+//    }
 
-    /**
-     * Sets the power for a single motor by name using the default power
-     *
-     * @param name The name of the motor
-     */
-    public void setPower(String name) {
-        DcMotorEx motor = motors.get(name);
-        if (motor != null) {
-            motor.setPower(defaultPower);
-        }
-    }
-
-    /**
-     * Sets the power for multiple motors by name using a specified power level
-     *
-     * @param names Array of motor names.
-     * @param power The power level to set for the motors (range from -1.0 to 1.0)
-     */
-    public void setPower(String[] names, double power) {
-        for (String name : names) {
-            DcMotorEx motor = motors.get(name);
-            if (motor != null) {
-                motor.setPower(power);
-            }
-        }
-    }
-
-    /**
-     * Sets the power for multiple motors by name using the default power
-     *
-     * @param names Array of motor names
-     */
-    public void setPower(String[] names) {
-        for (String name : names) {
-            DcMotorEx motor = motors.get(name);
-            if (motor != null) {
-                motor.setPower(defaultPower);
-            }
-        }
-    }
-
-    /**
-     * Moves the motor to a specific target position.
-     *
-     * @param name      the motor name from the map
-     * @param goal      target position in ticks
-     * @param power     power at which to move the motor
-     * @param telemetry used for displaying telemetry information
-     */
-    public void moveToGoal(String name, int goal, double power, Telemetry telemetry) {
-
-        DcMotorEx motor = motors.get(name);
-        if (motor == null) {
-            throw new IllegalStateException("Motor " + name + " is not initialized");
-        }
-
-        motor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        motor.setTargetPosition(goal);
-        motor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        motor.setPower(power);
-
-        while (motor.isBusy()) {
-            telemetry.addData(name + " Target", goal);
-            telemetry.addData(name + " Current", motor.getCurrentPosition());
-            telemetry.update();
-        }
-
-        motor.setPower(0); // stop motor
-        telemetry.addData(name + " Final", motor.getCurrentPosition());
-        telemetry.update();
-    }
+//    /**
+//     * Sets the power for multiple motors by name using the default power
+//     *
+//     * @param names Array of motor names
+//     */
+//    public void setPower(String[] names) {
+//        for (String name : names) {
+//            MotorEx motor = motors.get(name);
+//            if (motor != null) {
+//                motor.setPower(defaultPower);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Moves the motor to a specific target position.
+//     *
+//     * @param name      the motor name from the map
+//     * @param goal      target position in ticks
+//     * @param power     power at which to move the motor
+//     * @param telemetry used for displaying telemetry information
+//     */
+//    public void moveToGoal(String name, int goal, double power, Telemetry telemetry) {
+//
+//        MotorEx motor = motors.get(name);
+//        if (motor == null) {
+//            throw new IllegalStateException("Motor " + name + " is not initialized");
+//        }
+//
+//        motor.setMode(MotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        motor.setTargetPosition(goal);
+//        motor.setMode(MotorEx.RunMode.RUN_TO_POSITION);
+//        motor.setPower(power);
+//
+//        while (motor.isBusy()) {
+//            telemetry.addData(name + " Target", goal);
+//            telemetry.addData(name + " Current", motor.getCurrentPosition());
+//            telemetry.update();
+//        }
+//
+//        motor.setPower(0); // stop motor
+//        telemetry.addData(name + " Final", motor.getCurrentPosition());
+//        telemetry.update();
+//    }
 
     /**
      * Moves the motor to a specific velocity.
@@ -152,7 +153,7 @@ public class DcMotorExHelper {
      * @param telemetry used for displaying telemetry information
      */
     public void moveToVelocity(String name, double velocity, Telemetry telemetry) {
-        DcMotorEx motor = motors.get(name);
+        MotorEx motor = motors.get(name);
         if (motor == null) {
             throw new IllegalStateException("Motor " + name + " is not initialized");
         }
@@ -171,7 +172,7 @@ public class DcMotorExHelper {
      * @param telemetry  used for displaying telemetry information
      */
     public void moveToAngularVelocity(String name, double velocity, AngleUnit angleUnit, Telemetry telemetry) {
-        DcMotorEx motor = motors.get(name);
+        MotorEx motor = motors.get(name);
         if (motor == null) {
             throw new IllegalStateException("Motor " + name + " is not initialized");
         }
@@ -181,30 +182,30 @@ public class DcMotorExHelper {
         telemetry.update();
     }
 
-    /**
-     * Sets the run mode of a specific motor by name.
-     *
-     * @param motorName The name of the motor to set the mode
-     * @param mode The desired run mode
-     */
-    public void setMotorMode(String motorName, DcMotorEx.RunMode mode) {
-        DcMotorEx motor = motors.get(motorName);
-        if (motor != null) {
-            motor.setMode(mode);
-        }
-    }
-
-    /**
-     * Reverses the direction of a specific motor by name.
-     *
-     * @param motorName The name of the motor to reverse
-     */
-    public void reverseMotorDirection(String motorName) {
-        DcMotorEx motor = motors.get(motorName);
-        if (motor != null) {
-            motor.setDirection(DcMotorEx.Direction.REVERSE);
-        }
-    }
+//    /**
+//     * Sets the run mode of a specific motor by name.
+//     *
+//     * @param motorName The name of the motor to set the mode
+//     * @param mode The desired run mode
+//     */
+//    public void setMotorMode(String motorName, MotorEx.RunMode mode) {
+//        MotorEx motor = motors.get(motorName);
+//        if (motor != null) {
+//            motor.setMode(mode);
+//        }
+//    }
+//
+//    /**
+//     * Reverses the direction of a specific motor by name.
+//     *
+//     * @param motorName The name of the motor to reverse
+//     */
+//    public void reverseMotorDirection(String motorName) {
+//        MotorEx motor = motors.get(motorName);
+//        if (motor != null) {
+//            motor.setDirection(MotorEx.Direction.REVERSE);
+//        }
+//    }
 
     /**
      * Optional: Method to update the default power.
@@ -216,22 +217,22 @@ public class DcMotorExHelper {
     }
 
     /**
-     * Retrieves an array of DcMotorEx objects from an array of motor names.
+     * Retrieves an array of MotorEx objects from an array of motor names.
      *
      * @param motorNames Array of motor names as strings
-     * @return An array of DcMotorEx objects corresponding to the provided names
+     * @return An array of MotorEx objects corresponding to the provided names
      */
-    public DcMotorEx[] getMotorsFromNames(String[] motorNames) {
-        List<DcMotorEx> motorList = new ArrayList<>();
+    public MotorEx[] getMotorsFromNames(String[] motorNames) {
+        List<MotorEx> motorList = new ArrayList<>();
 
         for (String name : motorNames) {
-            DcMotorEx motor = motors.get(name);
+            MotorEx motor = motors.get(name);
             if (motor != null) {
                 motorList.add(motor);
             }
         }
 
-        return motorList.toArray(new DcMotorEx[0]); // Convert to array and return
+        return motorList.toArray(new MotorEx[0]); // Convert to array and return
     }
 
     /**
@@ -241,7 +242,7 @@ public class DcMotorExHelper {
      */
     protected void validateMovementMotors() {
         for (String name : MOVEMENT_MOTORS) {
-            DcMotorEx motor = motors.get(name);
+            MotorEx motor = motors.get(name);
             if (motor == null) {
                 throw new IllegalStateException("One or more MOVEMENT_MOTORS are not initialized");
             }
@@ -249,10 +250,10 @@ public class DcMotorExHelper {
     }
 
     public boolean areWheelsNull() {
-        DcMotorEx fl = motors.get("fl");
-        DcMotorEx fr = motors.get("fr");
-        DcMotorEx bl = motors.get("bl");
-        DcMotorEx br = motors.get("fr");
+        MotorEx fl = motors.get("fl");
+        MotorEx fr = motors.get("fr");
+        MotorEx bl = motors.get("bl");
+        MotorEx br = motors.get("fr");
         return fl == null || fr == null || br == null || bl == null;
     }
 }

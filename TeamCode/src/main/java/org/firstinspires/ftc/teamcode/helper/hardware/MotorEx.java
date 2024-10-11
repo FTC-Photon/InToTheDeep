@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
