@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.helper;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -15,20 +16,20 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStrafe(int goal, double power, boolean left, Telemetry telemetry){
+    public void moveToGoalStrafe(int goal, double power, boolean left, Telemetry telemetry, LinearOpMode opMode){
         validateMovementMotors();
         if(left) {
             //-br bl -fl fr
-            moveToGoal(MOVEMENT_MOTORS[0], -goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[2], -goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[1], goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[3], goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[0], -goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[2], -goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[1], goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[3], goal, power, telemetry, opMode);
         } else {
             //br -bl fl -fr
-            moveToGoal(MOVEMENT_MOTORS[0], goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[2], goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[1], -goal, power, telemetry);
-            moveToGoal(MOVEMENT_MOTORS[3], -goal, power, telemetry);
+            moveToGoal(MOVEMENT_MOTORS[0], goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[2], goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[1], -goal, power, telemetry, opMode);
+            moveToGoal(MOVEMENT_MOTORS[3], -goal, power, telemetry, opMode);
         }
     }
 
@@ -39,10 +40,10 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power to move all motors
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoalStraight(int goal, double power, Telemetry telemetry){
+    public void moveToGoalStraight(int goal, double power, Telemetry telemetry, LinearOpMode opMode){
         validateMovementMotors();
         for(String name: MOVEMENT_MOTORS){
-            moveToGoal(name, goal,power, telemetry);
+            moveToGoal(name, goal,power, telemetry, opMode);
         }
     }
 
@@ -53,8 +54,8 @@ public class MotorHelperAuto extends MotorHelper {
      * @param goal of rotation
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoal(String name, int goal, Telemetry telemetry) {
-        moveToGoal(name,goal,defaultPower,telemetry);
+    public void moveToGoal(String name, int goal, Telemetry telemetry, LinearOpMode opMode) {
+        moveToGoal(name,goal,defaultPower,telemetry, opMode);
     }
 
 
@@ -65,8 +66,8 @@ public class MotorHelperAuto extends MotorHelper {
      * @param goal of rotation
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoal(String[] names, int goal, Telemetry telemetry) {
-        moveToGoal(names,goal,defaultPower,telemetry);
+    public void moveToGoal(String[] names, int goal, Telemetry telemetry, LinearOpMode opMode) {
+        moveToGoal(names,goal,defaultPower,telemetry, opMode);
     }
 
 
@@ -77,12 +78,12 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power of rotation
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoal(String[] names, int goal, double power, Telemetry telemetry){
+    public void moveToGoal(String[] names, int goal, double power, Telemetry telemetry, LinearOpMode opMode){
         for(String name:names) {
             if(motors.get(name) == null){
                 throw new IllegalStateException("One name does not correspond to a current motor");
             }
-            moveToGoal(name,goal,power, telemetry);
+            moveToGoal(name,goal,power, telemetry, opMode);
         }
     }
 
@@ -94,14 +95,14 @@ public class MotorHelperAuto extends MotorHelper {
      * @param power of rotation
      * @param telemetry used for printing to the gamepad
      */
-    public void moveToGoal(String name, int goal, double power, Telemetry telemetry) {
+    public void moveToGoal(String name, int goal, double power, Telemetry telemetry, LinearOpMode opMode) {
         if(motors.get(name) == null){
             throw new IllegalStateException("Name does not correspond to a current motor");
         }
         DcMotor motor = motors.get(name);
 
 
-//        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setTargetPosition(goal);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -117,6 +118,12 @@ public class MotorHelperAuto extends MotorHelper {
 
         motor.setPower(power);
 
+
+        while (opMode.opModeIsActive() && motor.isBusy()) {
+            telemetry.addData("encoder-" + name, motor.getCurrentPosition() + "  busy=" + motor.isBusy());
+            telemetry.update();
+            opMode.idle();
+        }
 
         // set motor power to zero to turn off motors. The motors stop on their own but
         // power is still applied so turn off the power.

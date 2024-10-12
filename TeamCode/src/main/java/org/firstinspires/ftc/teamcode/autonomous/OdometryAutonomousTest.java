@@ -59,7 +59,7 @@ public class OdometryAutonomousTest extends LinearOpMode {
             fr.setPower(0.5);
 
             // Move straight forward
-            motorHelper.moveToGoalStraight(1000, 0.5, telemetry);
+            motorHelper.moveToGoalStraight(1000, 0.5, telemetry, this);
 
             // Update odometry and display the current pose
             odometryHelper.update();
@@ -70,7 +70,7 @@ public class OdometryAutonomousTest extends LinearOpMode {
             sleep(10000);
 
             // Move right
-            motorHelper.moveToGoalStrafe(500, 0.5, false, telemetry);
+            motorHelper.moveToGoalStrafe(500, 0.5, false, telemetry, this);
 
             // Update odometry and display the current pose after the turn
             odometryHelper.update();
@@ -81,7 +81,7 @@ public class OdometryAutonomousTest extends LinearOpMode {
             sleep(10000);
 
             // Move straight again
-            motorHelper.moveToGoalStraight(1000, 0.5, telemetry);
+            motorHelper.moveToGoalStraight(1000, 0.5, telemetry, this);
 
             // Final update and display the pose
             odometryHelper.update();
