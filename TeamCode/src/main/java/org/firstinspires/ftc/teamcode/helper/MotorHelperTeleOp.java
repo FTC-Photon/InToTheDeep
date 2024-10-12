@@ -32,4 +32,5 @@ public class MotorHelperTeleOp extends MotorHelper{
         bl.setPower(pivot - vertical - horizontal);
         fl.setPower(pivot - vertical + horizontal);
     }
+
 }

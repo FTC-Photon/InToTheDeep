@@ -54,9 +54,9 @@ public class OdometryAutonomousTest extends LinearOpMode {
             // Pause
             sleep(10000);
 
-            fr.setTargetPosition(1000);
-            fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            fr.setPower(0.5);
+//            fr.setTargetPosition(1000);
+//            fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            fr.setPower(0.5);
 
             // Move straight forward
             motorHelper.moveToGoalStraight(1000, 0.5, telemetry, this);

@@ -1,0 +1,26 @@
+:root {
+    /* Text Colors */
+    --body-text-color: #000000; /* Primary Black for main text */
+    --block-text-color: #000000; /* Primary Black for documentation blocks */
+    --navbar-text-color: #FFFFFF; /* Primary White for navbar text */
+    --selected-text-color: #484848; /* Primary Gray for selected text */
+    --selected-link-color: #00d9ff; /* Cyan Light Blue for selected links */
+
+    /* Background Colors */
+    --body-background-color: #FFFFFF; /* Primary White for the main background */
+    --section-background-color: #FCDE05; /* Primary Yellow for page sections */
+    --detail-background-color: #484848; /* Primary Gray for details section */
+    --navbar-background-color: #000000; /* Primary Black for navbar */
+    --subnav-background-color: #484848; /* Primary Gray for sub-nav */
+    --selected-background-color: #00d9ff; /* Cyan Light Blue for selected nav items */
+    --even-row-color: #FCDE05; /* Primary Yellow for even rows in tables */
+    --odd-row-color: #FFFFFF; /* Primary White for odd rows in tables */
+
+    /* Border and Other Colors */
+    --border-color: #484848; /* Primary Gray for borders */
+    --table-border-color: #000000; /* Primary Black for table borders */
+    --search-input-background-color: #FFFFFF; /* Primary White for search input */
+    --search-input-text-color: #000000; /* Primary Black for search input text */
+    --search-input-placeholder-color: #484848; /* Primary Gray for placeholder text */
+    --copy-icon-brightness: 150%;
+}

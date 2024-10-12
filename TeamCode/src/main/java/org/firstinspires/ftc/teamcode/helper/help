@@ -72,3 +72,6 @@ Overwrites the remote branch with the local state, making the past commit the cu
 git checkout -b <new-feature-branch>
 git push origin <new-feature-branch>
 Creates and pushes a new branch to the remote repository for ongoing development.
+
+Java doc format file command to use
+--add-stylesheet /Users/bridgerb/StudioProjects/InToTheDeep/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/helper/javaDocTeamFormat.css

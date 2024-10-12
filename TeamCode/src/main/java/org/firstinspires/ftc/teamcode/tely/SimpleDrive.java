@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class SimpleDrive extends LinearOpMode {
 
     private DcMotor clawArm, slide, fr, fl, br, bl;
-    private Servo claw;
+    private DcMotor claw;
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -26,7 +26,7 @@ public class SimpleDrive extends LinearOpMode {
         fl = hardwareMap.get(DcMotor.class, "fl");
         br = hardwareMap.get(DcMotor.class, "br");
         bl = hardwareMap.get(DcMotor.class, "bl");
-        claw = hardwareMap.get(Servo.class, "claw");
+        claw = hardwareMap.get(DcMotor.class, "claw");
 
         //init
         br.setDirection(DcMotor.Direction.REVERSE);
@@ -69,11 +69,11 @@ public class SimpleDrive extends LinearOpMode {
 
                 //claw
                 if (gamepad2.x) {
-                    claw.setPosition(0.0);
+                    claw.setPower(0.3);
                 } else if (gamepad2.y) {
-                    claw.setPosition(1.0);
+                    claw.setPower(-0.3);
                 } else {
-                    claw.setPosition(0.5);
+                    claw.setPower(0);
                 }
 
 
