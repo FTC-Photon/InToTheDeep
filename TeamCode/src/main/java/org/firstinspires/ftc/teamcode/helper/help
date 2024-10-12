@@ -16,7 +16,7 @@ git commit -m "Describe changes"
 git push origin master
 
 Update from master
-git reset --hard origin/main
+git reset --hard origin
 
 Branching
 git checkout -b new-branch-name : Create a new branch and switch to it
