@@ -4,11 +4,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@TeleOp(name = "SimpleDrive", group="Linear OpMode")
-public class SimpleDrive extends LinearOpMode {
+@TeleOp(name = "EncoderDrive", group="Linear OpMode")
+public class EncoderDrive extends LinearOpMode {
     private DcMotor clawArm, slide, fr, fl, br, bl;
     private DcMotor claw;
     private ElapsedTime runtime = new ElapsedTime();
+    double motorTicks = 537.7;
+
+
+    //Inches
+    double wheelCircumfrence = 96*Math.PI/25.4;
+    double currentTargetPosition;
+
     @Override
     public void runOpMode() {
         double vertical;
@@ -36,7 +43,7 @@ public class SimpleDrive extends LinearOpMode {
                 bl.setPower(pivot - vertical - horizontal);
                 fl.setPower(-1*(pivot - vertical + horizontal));
                 //GAMEPAD 2
-                //intake
+                //claw arm
                 if (gamepad2.a) {
                     clawArm.setPower(0.9);
                 } else if (gamepad2.b) {
@@ -45,22 +52,29 @@ public class SimpleDrive extends LinearOpMode {
                     clawArm.setPower(0);
                 }
                 //linear slide
-                if (gamepad2.left_bumper) {
-                    slide.setPower(-1.0);
-                }else if(gamepad2.right_bumper){
-                    slide.setPower(1.0);
-                }else if (gamepad2.dpad_down) {
-                    slide.setPower(-0.2);
-                }else if(gamepad2.dpad_up){
-                    slide.setPower(0.2);
-                } else {
-                    slide.setPower(0.0);
+                if(gamepad2.dpad_up){
+                    //score
+
+                    claw.setPower(0);
+                    claw.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    claw.setPower(-0.7);
+                    sleep(100);
+
+
+                    //claw arm down
+                    runMotorUsingEncoder(-0.25,clawArm);
+                    sleep(1000);
+                    clawArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+                    //slide up
+                    runMotorUsingEncoder(0.3, slide);
+                    sleep(1500);
+                    slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 }
 
-                //claw
+//                //claw
                 if (gamepad2.x) {
-                    claw.setPower(0.7);
-                } else if (gamepad2.y) {
                     claw.setPower(-0.7);
                 } else {
                     claw.setPower(0);
@@ -70,5 +84,25 @@ public class SimpleDrive extends LinearOpMode {
                 telemetry.update();
             }
         }
+    }
+    private void stopAndRestAll(){
+        clawArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        claw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+    public void runMotorUsingEncoder(double turnage, DcMotor mot){
+        runMotorUsingEncoder(turnage, mot, 0.1);
+    }
+
+    public void runMotorUsingEncoder(double turnage, DcMotor mot, double speed){
+        mot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        currentTargetPosition = motorTicks*turnage;
+        mot.setTargetPosition((int)currentTargetPosition);
+        mot.setPower(speed);
+        mot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

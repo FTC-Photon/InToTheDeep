@@ -102,39 +102,39 @@ public class DcMotorExHelperAuto extends DcMotorExHelper {
         if(motors.get(name) == null){
             throw new IllegalStateException("Name does not correspond to a current motor");
         }
-        DcMotorEx motor = motors.get(name);
+        //DcMotorEx motor = motors.get(name);
 
 
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor.setTargetPosition(goal);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-
-
-        telemetry.addData("Mode", "waiting");
-        telemetry.update();
-        telemetry.addData("Mode", "running");
-        telemetry.update();
-
-
-
-
-        motor.setPower(power);
-
-
-        // set motor power to zero to turn off motors. The motors stop on their own but
-        // power is still applied so turn off the power.
-        motor.setPower(0.0);
-
-
-
-
-        // wait 5 sec to you can observe the final encoder position.
-
-
-
-
-        telemetry.addData("encoder-fnt-left-end", motor.getCurrentPosition());
+//        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        motor.setTargetPosition(goal);
+//        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+////
+//
+//
+//
+//        telemetry.addData("Mode", "waiting");
+//        telemetry.update();
+//        telemetry.addData("Mode", "running");
+//        telemetry.update();
+//
+//
+//
+//
+//        motor.setPower(power);
+//
+//
+//        // set motor power to zero to turn off motors. The motors stop on their own but
+//        // power is still applied so turn off the power.
+//        motor.setPower(0.0);
+//
+//
+//
+//
+//        // wait 5 sec to you can observe the final encoder position.
+//
+//
+//
+//
+//        telemetry.addData("encoder-fnt-left-end", motor.getCurrentPosition());
     }
 }
