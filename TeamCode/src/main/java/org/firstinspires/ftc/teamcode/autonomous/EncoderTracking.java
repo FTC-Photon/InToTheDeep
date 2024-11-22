@@ -5,16 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+/**
+ * use when trying to find values of moters with encoders
+ */
 @TeleOp(name = "EncoderTracking", group = "Linear Opmode")
 public class EncoderTracking extends LinearOpMode {
-
-    double motorTicks = 537.7;
-
-
-    //Inches
-    double wheelCircumfrence = 96*Math.PI/25.4;
-    DcMotor testMotor;
-    double currentTargetPosition;
 
     private DcMotor clawArm, fr, fl, br, bl;
 

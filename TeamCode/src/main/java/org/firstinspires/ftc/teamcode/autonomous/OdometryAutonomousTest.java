@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.helper.geomoetry.Pose2d;
 import org.firstinspires.ftc.teamcode.helper.geomoetry.Rotation2d;
 
 @Autonomous(name = "OdometryAutonomousTest", group = "Linear Opmode")
+@Disabled
 public class OdometryAutonomousTest extends LinearOpMode {
     private MotorHelperAuto motorHelper;
     private OdometryHelper odometryHelper;

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.helper.MotorHelper;
 
 @TeleOp(name = "SimpleDriveMotorHelper", group="Linear OpMode")
+@Disabled
 public class SimpleDriveMotorHelper extends LinearOpMode {
 
     private MotorHelper motorHelper;
@@ -21,7 +22,6 @@ public class SimpleDriveMotorHelper extends LinearOpMode {
 
         motorHelper = new MotorHelper();
 
-        // Initialize
         motorHelper.initializeWheels(hardwareMap);
         claw = hardwareMap.get(Servo.class, "claw");
 

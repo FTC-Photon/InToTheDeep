@@ -11,6 +11,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 @TeleOp(name = "AprilTagTesting", group="Linear OpMode")
+@Disabled
 public class AprilTagTesting extends LinearOpMode {
 
     @Override
