@@ -11,7 +11,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 @Autonomous(name = "DeepDiveAuto", group = "Linear Opmode")
-public class EncoderTest extends LinearOpMode {
+public class EncoderDeepDiveAuto extends LinearOpMode {
 
     double motorTicks = 537.7;
 

@@ -54,22 +54,7 @@ public class EncoderDrive extends LinearOpMode {
                 }
                 //Score
                 if(gamepad2.dpad_up){
-                    intake.setPower(0);
-                    intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                    intake.setPower(-0.7);
-                    sleep(100);
-
-
-                    //claw arm down
-                    runMotorUsingEncoder(-0.25, intakeArm);
-                    sleep(1000);
-                    intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-                    //slide up
-                    runMotorUsingEncoder(0.3, slide);
-                    sleep(1500);
-                    slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    score();
                 }
 
                 //claw
@@ -84,6 +69,26 @@ public class EncoderDrive extends LinearOpMode {
             }
         }
     }
+
+    private void score(){
+        intake.setPower(0);
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intake.setPower(-0.7);
+        sleep(100);
+
+
+        //claw arm down
+        runMotorUsingEncoder(-0.25, intakeArm);
+        sleep(1000);
+        intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+        //slide up
+        runMotorUsingEncoder(0.3, slide);
+        sleep(1500);
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
     private void stopAndRestAll(){
         intakeArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
