@@ -1,0 +1,17 @@
+git hub
+git status
+tells what files have been updated and need to be added to a commit
+
+to add files to a commit use:
+git add fileName
+
+to make a commit after you have added all of the changed files
+git commit -m nameOfCommit
+
+to push changed commit to git hub
+git push origin master
+
+---------
+
+to get changes on git hub
+git pull origin master
