@@ -7,7 +7,6 @@ public class OdometryHelper {
     private double TRACKWIDTH = 14.31;
     private double CENTER_WHEEL_OFFSET = 0.477;
     private double WHEEL_DIAMETER = 2.0;
-    // if needed, one can add a gearing term here
     private final double TICKS_PER_REV = 8192;
     private double DISTANCE_PER_PULSE;
 
